@@ -17,9 +17,15 @@
     "url": "git+https://github.com/houchenghao/FooFood.git"
   },
   "author": "",
+  "keywords": [],
   "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  
   "bugs": {
     "url": "https://github.com/houchenghao/FooFood/issues"
   },
   "homepage": "https://github.com/houchenghao/FooFood#readme"
+  
 }
