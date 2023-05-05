@@ -1,0 +1,31 @@
+[
+    {
+        "username": "Chenghao Hou",
+        "email": "chenghao@gmail.com",
+        "password": "password123"
+    },
+
+    {
+        "username": "test1name test1surname",
+        "email": "test1@gmail.com",
+        "password": "password123"
+    },
+
+    {
+        "username": "test2name test2surname",
+        "email": "test2@gmail.com",
+        "password": "password123"
+    },
+
+    {
+        "username": "test3name test3surname",
+        "email": "test3@gmail.com",
+        "password": "password123"
+    },
+
+    {
+        "username": "test4name test4surname",
+        "email": "test4@gmail.com",
+        "password": "password123"
+    }
+]
