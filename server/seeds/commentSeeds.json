@@ -1,0 +1,27 @@
+[
+    {
+        "commentText": "user1 think that this is a very good food",
+        "commentAuthor": "user1"
+    },
+
+    {
+        "commentText": "user2 think that this is a very good food",
+        "commentAuthor": "user2"
+    },
+
+    {
+        "commentText": "user3 think that this is a very good food",
+        "commentAuthor": "user3"
+    },
+
+    {
+        "commentText": "user4 think that this is a very good food",
+        "commentAuthor": "user4"
+    },
+
+
+    {
+        "commentText": "Chenghao think that this is a very good food",
+        "commentAuthor": "Chenghao"
+    }
+]

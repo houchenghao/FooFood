@@ -29,9 +29,13 @@ const recipeSchema = new Schema({
         ref: 'User'
     },
 
-    comments: {
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'   
+    }],
+
+    imageLink: {
+        type: String,
     }
 });
 

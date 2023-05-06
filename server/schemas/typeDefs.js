@@ -31,6 +31,7 @@ const typeDefs = gql`
 
     type Query{
         user:[User]
+        allrecipes:[Recipe]
         recipes (username: String): [Recipe]
         recipe (recipesId: ID!): Recipe
         comments (recipeId: ID!): [Comment]
