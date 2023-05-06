@@ -2,21 +2,18 @@
     {
         "recipeName" : "meatball",
         "recipeDescription":"asfdsafsdfdsafewafwafavdsafewarfewadsavaveravraef",
-        "recipeUser": "Chenghao",
         "imageLink": "https://www.shutterstock.com/image-photo/blank-vintage-recipe-cooking-book-260nw-504504346.jpg"
     },
 
     {
         "recipeName" : "fry chicken wing",
         "recipeDescription":"asfdsafsdfdsafewafwafavdsafewarfewadsavaveravraef",
-        "recipeUser": "Chenghao",
         "imageLink": "https://www.deliciousmagazine.co.uk/wp-content/uploads/2023/04/Cheesy-Kimchi-Linguine-with-gochujang-Butter-768x960.jpg"
     },
 
     {
         "recipeName" : "fire rice",
         "recipeDescription":"asfdsafsdfdsafewafwafavdsafewarfewadsavaveravraef",
-        "recipeUser": "Chenghao",
         "imageLink": "https://hips.hearstapps.com/hmg-prod/images/one-pot-spaghetti-6408ea3a9a32c.jpg?crop=1.00xw:0.335xh;0,0.262xh&resize=1200:*"
     },
 
@@ -24,15 +21,12 @@
     {
         "recipeName" : "Dal",
         "recipeDescription":"asfdsafsdfdsafewafwafavdsafewarfewadsavaveravraef",
-        "recipeUser": "Chenghao",
         "imageLink": "https://www.feastingathome.com/wp-content/uploads/2021/12/best-vegetarian-recipes-1-1-692x1024.jpg"
     },
 
     {
         "recipeName" : "Bruschetta",
         "recipeDescription":"asfdsafsdfdsafewafwafavdsafewarfewadsavaveravraef",
-        "recipeUser": "Chenghao",
         "imageLink": "https://www.allrecipes.com/thmb/JTzW5gc_aeyu2NS5J8dB6yN79F0=/364x242/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/bisquick-cheddar-bay-biscuits-4536295-a87046bcdede45c99892c9ba3b3d2ffd.jpeg"
-
     }
 ]

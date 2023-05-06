@@ -4,24 +4,26 @@ const typeDefs = gql`
     type User {
         _id: ID
         username: String
-        recipes: [Recipe]
+        email: String
     }
 
     type Recipe {
         _id: ID
         recipeName: String
-        description: String
-        createdAt: String
+        recipeDescription: String
+        created_at: String
         updated_at: String
-        recipeUser: User
+        userId: User
+        imageLink: String
     }
 
     type Comment {
         _id: ID
         commentText: String
-        commentAuthor: User
-        CreatedAt: String
+        created_at: String
         updated_at: String
+        userId: User
+        recipeId: Recipe
     }
 
     type Auth {
@@ -30,20 +32,24 @@ const typeDefs = gql`
     }
 
     type Query{
-        user:[User]
-        allrecipes:[Recipe]
-        recipes (username: String): [Recipe]
-        recipe (recipesId: ID!): Recipe
-        comments (recipeId: ID!): [Comment]
+        users:[User]
+        recipes:[Recipe]
+        recipe(recipeId:ID!):Recipe
+        comments:[Comment]
+
+        recipeComment(recipeId:ID!): [Comment]
     }
 
     type Mutation{
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
+
+
         addRecipe(recipeName: String!, recipeDescription: String!): Recipe
         addComment(recipeId: ID!, commentText: String!,): Comment
         removeRecipe(recipeId: ID!): Recipe
         removeComment(commentId: ID!): Comment
+
     }
 
 `

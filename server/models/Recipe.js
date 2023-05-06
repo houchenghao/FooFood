@@ -12,7 +12,7 @@ const recipeSchema = new Schema({
         required: true,
     },
 
-    createdAt: {
+    created_at: {
         type: Date,
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
@@ -24,15 +24,10 @@ const recipeSchema = new Schema({
         get: (timestamp) => dateFormat(timestamp),
     },
 
-    recipeUser: {
-        type: String,
+    userId: {
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
-
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'   
-    }],
 
     imageLink: {
         type: String,

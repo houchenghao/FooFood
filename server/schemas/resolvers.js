@@ -4,9 +4,30 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        user: async() => {
-            return User.find().populate('recipes')
+        users: async() => {
+            const users = await User.find();
+            return users
+        },
+        recipes: async () => {
+            return await Recipe.find().populate('userId');
+        },
+        recipe: async(parent, {recipeId}) => {
+            const recipe = await Recipe.findOne({_id: recipeId}).populate('userId');
+            return recipe
+        },
+        comments: async () => {
+            return await Comment.find().populate('userId').populate('recipeId');
+        },
+
+        recipeComment: async(parent, {recipeId}) => {
+            // const recipe = await Recipe.findOne({_id: recipeId}).populate('recipeId');
+            // const comments = await Comment.find({_id: recipe.comments});
+            const comments = await Comment.find ({recipeId: recipeId}).populate('recipeId')
+
+            return comments
+            // return recipe.comments
         }
+
     },
 
     Mutation: {
@@ -65,3 +86,4 @@ const resolvers = {
     }
 }
 
+module.exports = resolvers;

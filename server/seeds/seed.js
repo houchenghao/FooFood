@@ -15,19 +15,20 @@ db.once('open', async () => {
     const comments = await Comment.insertMany(commentData);
 
 
-    for (let i = 0; i < users.length; i++) {
-        users[i].recipes.push(recipes[i]);
-        await users[i].save();
-    }
+    for (let i = 0; i < comments.length; i++) {
+        comments[i].userId = users[i]._id;
+        await comments[i].save();
+    };
 
+    for (let i = 0; i < comments.length; i++) {
+        comments[i].recipeId = recipes[i]._id;
+        await comments[i].save();
+    };
 
-    for (let i = 0; i< recipes.length; i++){
-        recipes[i].comments.push(comments[i]);
+    for (let i = 0; i < recipes.length; i++) {
+        recipes[i].userId = users[i]._id;
         await recipes[i].save();
-    }
-    
-
-
+    };
 
     console.log('all done!');
     process.exit(0);

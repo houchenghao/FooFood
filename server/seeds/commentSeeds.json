@@ -1,27 +1,27 @@
 [
     {
-        "commentText": "user1 think that this is a very good food",
-        "commentAuthor": "user1"
+        "commentText": "user1 think that this is a very good food"
+        
     },
 
     {
-        "commentText": "user2 think that this is a very good food",
-        "commentAuthor": "user2"
+        "commentText": "user2 think that this is a very good food"
+    
     },
 
     {
-        "commentText": "user3 think that this is a very good food",
-        "commentAuthor": "user3"
+        "commentText": "user3 think that this is a very good food"
+        
     },
 
     {
-        "commentText": "user4 think that this is a very good food",
-        "commentAuthor": "user4"
+        "commentText": "user4 think that this is a very good food"
+        
     },
 
 
     {
-        "commentText": "Chenghao think that this is a very good food",
-        "commentAuthor": "Chenghao"
+        "commentText": "Chenghao think that this is a very good food"
+        
     }
 ]
