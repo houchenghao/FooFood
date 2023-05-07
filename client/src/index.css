@@ -1,0 +1,24 @@
+.home-page-recipe-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.home-page-recipe {
+    margin: 10px;
+    text-align: left;
+}
+
+.home-page-recipe-image{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.home-page-recipe-name {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    font-family: cursive;
+}

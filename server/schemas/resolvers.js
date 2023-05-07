@@ -6,26 +6,23 @@ const resolvers = {
     Query: {
         users: async() => {
             const users = await User.find();
-            return users
+            return users;
         },
         recipes: async () => {
             return await Recipe.find().populate('userId');
         },
         recipe: async(parent, {recipeId}) => {
             const recipe = await Recipe.findOne({_id: recipeId}).populate('userId');
-            return recipe
+            return recipe;
         },
         comments: async () => {
-            return await Comment.find().populate('userId').populate('recipeId');
+            const comments = await Comment.find().populate('userId').populate('recipeId');
+            return comments;
         },
 
         recipeComment: async(parent, {recipeId}) => {
-            // const recipe = await Recipe.findOne({_id: recipeId}).populate('recipeId');
-            // const comments = await Comment.find({_id: recipe.comments});
-            const comments = await Comment.find ({recipeId: recipeId}).populate('recipeId')
-
-            return comments
-            // return recipe.comments
+            const comments = await Comment.find ({recipeId: recipeId}).populate('recipeId');
+            return comments;
         }
 
     },
@@ -37,23 +34,20 @@ const resolvers = {
             return{ token, user }
         },
 
-        login: async (parent, {email, password}) => {
-            const user = await User. create({ username, email, password });
-
-            if (!user) {
-                throw new AuthenticationError ('No user found with this email address');
-            }
-
-            const correctPw = await user.isCorrectPassword(password);
-
-            if (!correctPw) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
-
-            const token = signToken(user);
-
-            return { token, user}
+        login: async (parent, { email, password }) => {
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new AuthenticationError('No user found with this email address');
+        }
+        const correctPw = await user.isCorrectPassword(password);
+        if (!correctPw) {
+            throw new AuthenticationError('Incorrect credentials');
+        }
+        const token = signToken(user);
+        return { token, user };
         },
+
+        
 
         addRecipe: async(parent, {recipeName, recipeDescription}, context) => {
             if (context.user) {

@@ -1,13 +1,26 @@
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+// import { setContext } from '@apollo/client/link/context';
+
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Header from './components/Header';
+import Recipe from './pages/Recipe';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -29,47 +42,59 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
         <div>
           <Header/>
-          <div className = 'container'>
+          <div>
             <Routes>
               <Route
                 path="/"
                 element={<Home/>}
-              />
-              {/* <Route
-                path="/login"
-                element={<Login/>}
-              />
+              >
+              </Route>
+
               <Route
                 path="/signup"
                 element={<Signup/>}
-              />
+                >
+              </Route>
+
               <Route
-                path="/me"
-                element={<Profile/>}
-              />
+                path="/recipe/:recipeId"
+                element={<Recipe/>}
+              >
+              </Route>
+
               <Route
-                path="/profiles/:username"
-                element={<Profile/>}
-              />
-              <Route
-                path="/recipe/:username"
-                element={<Profile/>}
-              />         */}
+                path="/login"
+                element={<Login/>}
+              >
+              </Route>
+
+
+
             </Routes>
           </div>
-          {/* <Footer/> */}
-        </div>   
+        </div>
+
       </Router>
+
+
+     
+
+
+     
+      
     </ApolloProvider>
   );
 }
 
 export default App;
+
+
+
+
+
