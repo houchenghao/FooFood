@@ -35,19 +35,42 @@ const resolvers = {
         },
 
         login: async (parent, { email, password }) => {
-        const user = await User.findOne({ email });
-        if (!user) {
-            throw new AuthenticationError('No user found with this email address');
-        }
-        const correctPw = await user.isCorrectPassword(password);
-        if (!correctPw) {
-            throw new AuthenticationError('Incorrect credentials');
-        }
-        const token = signToken(user);
-        return { token, user };
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw new AuthenticationError('No user found with this email address');
+            }
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+            const token = signToken(user);
+            return { token, user };
         },
 
-        
+
+
+        addComment: async (parent, { recipeId, commentText}, context) => {
+            if (context.user) {
+                const comment = await Comment.create({
+                    recipeId,
+                    commentText,
+                    userId: context.user._id,
+                });
+
+                return comment;
+
+                // await recipeId.findOneAndUpdate(
+                //     { _id: recipeId},
+                //     { $addToSet: {comments: comment._id}},
+                //     {   
+                //         new: true,
+                //         runValidators: true,
+                //     }
+                // )
+            };
+        },
+
+
 
         addRecipe: async(parent, {recipeName, recipeDescription}, context) => {
             if (context.user) {
@@ -64,19 +87,7 @@ const resolvers = {
             }
         },
 
-        addComment: async (parent, { recipeId, commentText}, context) => {
-            if (context.user) {
-                const comment = await Comment.create({
-                    commentText,
-                    commentAuthor: context.user.username
-                });
 
-                await recipeId.findOneAndUpdate(
-                    { _id: recipeId},
-                    { $addToSet: {comments: comment._id}}
-                )
-            }
-        }
     }
 }
 

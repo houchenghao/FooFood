@@ -5,6 +5,9 @@ import { useQuery } from '@apollo/client';
 import { QUERY_RECIPES, QUERY_SINGLE_RECIPE, QUERY_RECIPE_COMMENTS } from '../utils/queries';
 import Auth from '../utils/auth';
 
+
+import CommentForm from '../components/CommentForm';
+
 const Recipe = () => {
     const { recipeId: userParam } = useParams();
 
@@ -19,38 +22,41 @@ const Recipe = () => {
 
     const comments = commentData?.recipeComment || {};
 
+    if(recipeLoading||commentLoading) {
+        return <div>Loading...</div>
+    }
+
     return(
         <div>
             <div>
-                {(recipeLoading) ? (
-                        <div> Loading...</div>
-                    )
-                    :
-                    (
-                        <div key = {recipe._id} className='home-page-recipe'>
-                            <img className='home-page-recipe-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
-                            <h2 className='home-page-recipe-name'> {recipe.recipeName} </h2>
-                            <p>{recipe.recipeDescription}</p>
-                        </div>
-                    )}
+                <div key = {recipe._id} className='home-page-recipe'>
+                    <img className='home-page-recipe-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
+                    <h2 className='home-page-recipe-name'> {recipe.recipeName} </h2>
+                    <p>{recipe.recipeDescription}</p>
+                    <p>
+                        {recipe.userId.username}
+                        {recipe.userId._id}
+                    </p>
+                </div>
+                    
             </div>
 
             <div>
-                {(commentLoading) ? (
-                        <div> Loading...</div>
-                    )
-                    :
-                    (
-                        comments.map((comment) => {
-                            return (
-                                
-                                <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
-                                // <textarea key = {comment._id}> {comment.commentText}  </textarea>
-                            )
-                        })
-                    )
-                };
+                {
+                    comments.map((comment) => {
+                        return (
+                            <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
+                        )
+                    })
+                }  
+            </div>
+
+            <div>
                 
+                <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+                    <CommentForm recipeId={recipe._id} />
+                </div>
+
             </div>
         </div>
     )
