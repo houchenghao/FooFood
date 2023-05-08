@@ -23,6 +23,23 @@ const resolvers = {
         recipeComment: async(parent, {recipeId}) => {
             const comments = await Comment.find ({recipeId: recipeId}).populate('recipeId');
             return comments;
+        },
+        
+        meRecipes: async(parent, args, context) => {
+            if (context.user) {
+                return await Recipe.find({ userId: context.user._id }).populate('userId')
+            }
+        },
+
+        userRecipes: async(parent, {username}, context) => {
+            if (context.user) {
+                const user = await User.findOne({username});
+                if (!user){
+                    return null;
+                }
+                const userRecipes = await Recipe.find({ userId: user._id }).populate('userId');
+                return userRecipes;
+            }
         }
 
     },
@@ -56,19 +73,7 @@ const resolvers = {
                     commentText,
                     userId: context.user._id,
                 });
-
-                console.log(context.user._id)
-
                 return comment;
-
-                // await recipeId.findOneAndUpdate(
-                //     { _id: recipeId},
-                //     { $addToSet: {comments: comment._id}},
-                //     {   
-                //         new: true,
-                //         runValidators: true,
-                //     }
-                // )
             };
         },
 

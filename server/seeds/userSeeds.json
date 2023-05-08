@@ -2,30 +2,30 @@
     {
         "username": "Chenghao",
         "email": "chenghao@gmail.com",
-        "password": "password123"
+        "password": "$2b$10$P.RNhbo.97KTgRrAomOzsuK1mfhMIopSJ9HXndMlm6KyQ4uFk6H1C"
     },
 
     {
         "username": "user1",
         "email": "user1@gmail.com",
-        "password": "password123"
+        "password": "$2b$10$P.RNhbo.97KTgRrAomOzsuK1mfhMIopSJ9HXndMlm6KyQ4uFk6H1C"
     },
 
     {
         "username": "user2",
         "email": "user2@gmail.com",
-        "password": "password123"
+        "password": "$2b$10$P.RNhbo.97KTgRrAomOzsuK1mfhMIopSJ9HXndMlm6KyQ4uFk6H1C"
     },
 
     {
         "username": "user3",
         "email": "user3@gmail.com",
-        "password": "password123"
+        "password": "$2b$10$P.RNhbo.97KTgRrAomOzsuK1mfhMIopSJ9HXndMlm6KyQ4uFk6H1C"
     },
 
     {
         "username": "user4",
         "email": "user4@gmail.com",
-        "password": "password123"
+        "password": "$2b$10$P.RNhbo.97KTgRrAomOzsuK1mfhMIopSJ9HXndMlm6KyQ4uFk6H1C"
     }
 ]

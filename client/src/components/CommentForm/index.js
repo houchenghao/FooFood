@@ -27,8 +27,6 @@ const CommentForm = ({ recipeId }) => {
         },
       });
 
-      
-
       setCommentText('');
     } catch (err) {
       console.error(err);
@@ -46,7 +44,7 @@ const CommentForm = ({ recipeId }) => {
 
   return (
     <div>
-      <h4>What are your thoughts on this thought?</h4>
+      <h4>Leave your comment here</h4>
 
       {Auth.loggedIn() ? (
         <>

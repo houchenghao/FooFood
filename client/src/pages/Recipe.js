@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_RECIPES, QUERY_SINGLE_RECIPE, QUERY_RECIPE_COMMENTS } from '../utils/queries';
@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 
 
 import CommentForm from '../components/CommentForm';
+import CommentList from '../components/CommentList'
 
 const Recipe = () => {
     const { recipeId: userParam } = useParams();
@@ -26,6 +27,8 @@ const Recipe = () => {
         return <div>Loading...</div>
     }
 
+    console.log(recipe.userId.username)
+
     return(
         <div>
             <div>
@@ -33,31 +36,31 @@ const Recipe = () => {
                     <img className='home-page-recipe-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
                     <h2 className='home-page-recipe-name'> {recipe.recipeName} </h2>
                     <p>{recipe.recipeDescription}</p>
-                    <p>
-                        {recipe.userId.username}
-                        {recipe.userId._id}
-                    </p>
+                    <div>
+
+                        <Link to = {`/profile/${recipe.userId.username}`}>
+                            Check {recipe.userId.username}'s other recipes
+                        </Link>
+                        
+                    </div>
+                        
+                    
                 </div>
                     
             </div>
 
             <div>
-                {
-                    comments.map((comment) => {
-                        return (
-                            <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
-                        )
-                    })
-                }  
-            </div>
-
-            <div>
+                <CommentList comments = {comments}/>
                 
-                <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-                    <CommentForm recipeId={recipe._id} />
-                </div>
-
             </div>
+
+            
+                
+            <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+                <CommentForm recipeId={recipe._id} />
+            </div>
+
+            
         </div>
     )
 };

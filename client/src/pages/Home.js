@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 
 
 import { QUERY_RECIPES } from '../utils/queries';
+import RecipeList from '../components/RecipesList';
 
 
 const Home = () => {
     const { loading, data } = useQuery(QUERY_RECIPES);
     const recipes = data?.recipes || [];
+
+    if (loading) {
+        return <div> Loading...</div>
+    }
+
     return (
         <main>
             <div>
@@ -18,21 +24,9 @@ const Home = () => {
                 
             </div>
             <div className='home-page-recipe-card'>
-                {loading ? (
-                    <div> Loading...</div>
-                ) : (
-                    recipes.map((recipe) => {
-                        return (
-                            <Link to={`/recipe/${recipe._id}`} key = {recipe._id}>
-                                <div  className='home-page-recipe'>
-                                    <img className='home-page-recipe-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
-                                    <h2 className='home-page-recipe-name'> {recipe.recipeName} </h2>
-                                </div>
-                            </Link>
-                        )
-                    }
-                    )
-                )}
+
+                <RecipeList recipes = {recipes}/>
+
             </div>
         </main>
     );
