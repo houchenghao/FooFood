@@ -57,6 +57,8 @@ const resolvers = {
                     userId: context.user._id,
                 });
 
+                console.log(context.user._id)
+
                 return comment;
 
                 // await recipeId.findOneAndUpdate(

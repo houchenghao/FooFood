@@ -15,6 +15,9 @@ const CommentForm = ({ recipeId }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+
+    console.log (commentText)
+
     try {
       const { data } = await addComment({
         variables: {
@@ -23,6 +26,8 @@ const CommentForm = ({ recipeId }) => {
           userId: Auth.getProfile().data._id,
         },
       });
+
+      
 
       setCommentText('');
     } catch (err) {

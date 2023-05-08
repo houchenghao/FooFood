@@ -33,8 +33,6 @@ export const ADD_COMMENT = gql`
       commentText
       created_at
       updated_at
-      userId
-      recipeId
     }
   }
 `;
