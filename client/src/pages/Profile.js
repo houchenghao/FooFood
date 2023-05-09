@@ -9,7 +9,7 @@ import { QUERY_USER_RECIPES, QUERY_ME_RECIPES } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
-const Profile = () => {
+const Profile = ({addRecipeList}) => {
   const { username: userParam } = useParams();
 
   const { loading, data } = useQuery(userParam ? QUERY_USER_RECIPES : QUERY_ME_RECIPES, {
@@ -26,7 +26,7 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
   
-  console.log(recipes)
+//   console.log(addRecipeList)
 
 
   if (!Auth.loggedIn()) {
@@ -42,12 +42,18 @@ const Profile = () => {
     <div>
         <div>
             <RecipesList recipes = {recipes}/>
-            hello
         </div>
 
-        <div>
-            <AddRecipeForm/>
-        </div>
+        
+        {(addRecipeList) ? (
+                <div>
+                    <AddRecipeForm/>
+                </div>
+        ) :(
+                <div>
+                    
+                </div>
+        )}
     </div>
   );
 };

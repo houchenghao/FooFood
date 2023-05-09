@@ -77,13 +77,13 @@ function App() {
 
               <Route
                 path="/me"
-                element={<Profile/>}
+                element={<Profile addRecipeList = {true}/>}
               >
               </Route>
 
               <Route
                 path="/profile/:username"
-                element={<Profile/>}
+                element={<Profile addRecipeList = {false}/>}
               >
               </Route>
 
