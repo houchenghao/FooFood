@@ -25,7 +25,6 @@ export const ADD_USER = gql`
   }
 `;
 
-
 export const ADD_COMMENT = gql`
   mutation addComment($recipeId: ID!, $commentText: String!) {
     addComment(recipeId: $recipeId, commentText: $commentText) {
@@ -35,4 +34,14 @@ export const ADD_COMMENT = gql`
       updated_at
     }
   }
+`;
+
+export const ADD_RECIPE = gql`
+mutation AddRecipe($recipeName: String!, $recipeDescription: String!, $imageLink: String!) {
+  addRecipe(recipeName: $recipeName, recipeDescription: $recipeDescription, imageLink: $imageLink) {
+    _id
+    recipeDescription
+    recipeName
+  }
+}
 `;

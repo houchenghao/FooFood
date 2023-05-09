@@ -41,7 +41,6 @@ const resolvers = {
                 return userRecipes;
             }
         }
-
     },
 
     Mutation: {
@@ -64,8 +63,6 @@ const resolvers = {
             return { token, user };
         },
 
-
-
         addComment: async (parent, { recipeId, commentText}, context) => {
             if (context.user) {
                 const comment = await Comment.create({
@@ -77,24 +74,17 @@ const resolvers = {
             };
         },
 
-
-
-        addRecipe: async(parent, {recipeName, recipeDescription}, context) => {
+        addRecipe: async(parent, {recipeName, recipeDescription, imageLink}, context) => {
             if (context.user) {
                 const recipe = await Recipe.create({
                     recipeName,
                     recipeDescription,
-                    recipeUser: context.user.username
+                    userId: context.user._id,
+                    imageLink
                 });
-
-                await User.findOneAndUpdate(
-                    { _id: context.user._id},
-                    { $addToSet: { recipes: recipe._id }}
-                )
+                return recipe;
             }
         },
-
-
     }
 }
 

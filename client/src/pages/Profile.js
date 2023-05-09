@@ -1,8 +1,9 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import RecipesList from '../components/RecipesList'
+import AddRecipeForm from '../components/AddRecipeForm'
 
 import { QUERY_USER_RECIPES, QUERY_ME_RECIPES } from '../utils/queries';
 
@@ -26,7 +27,7 @@ const Profile = () => {
   }
   
   console.log(recipes)
-  console.log(recipes)
+
 
   if (!Auth.loggedIn()) {
     return (
@@ -39,8 +40,14 @@ const Profile = () => {
 
   return (
     <div>
-        <RecipesList recipes = {recipes}/>
-      hello
+        <div>
+            <RecipesList recipes = {recipes}/>
+            hello
+        </div>
+
+        <div>
+            <AddRecipeForm/>
+        </div>
     </div>
   );
 };

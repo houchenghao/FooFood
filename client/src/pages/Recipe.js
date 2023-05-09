@@ -27,7 +27,7 @@ const Recipe = () => {
         return <div>Loading...</div>
     }
 
-    console.log(recipe.userId.username)
+    // console.log(recipe.userId.username)
 
     return(
         <div>
@@ -43,10 +43,7 @@ const Recipe = () => {
                         </Link>
                         
                     </div>
-                        
-                    
-                </div>
-                    
+                </div>   
             </div>
 
             <div>
