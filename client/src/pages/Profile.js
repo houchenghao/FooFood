@@ -26,9 +26,6 @@ const Profile = ({addRecipeList}) => {
     return <div>Loading...</div>;
   }
   
-//   console.log(addRecipeList)
-
-
   if (!Auth.loggedIn()) {
     return (
       <h4>

@@ -54,53 +54,37 @@ function App() {
               <Route
                 path="/"
                 element={<Home/>}
-              >
-              </Route>
+              ></Route>
 
               <Route
                 path="/signup"
                 element={<Signup/>}
-                >
-              </Route>
+                ></Route>
 
               <Route
                 path="/recipe/:recipeId"
                 element={<Recipe/>}
-              >
-              </Route>
+              ></Route>
 
               <Route
                 path="/login"
                 element={<Login/>}
-              >
-              </Route>
+              ></Route>
 
               <Route
                 path="/me"
                 element={<Profile addRecipeList = {true}/>}
-              >
-              </Route>
+              ></Route>
 
               <Route
                 path="/profile/:username"
                 element={<Profile addRecipeList = {false}/>}
-              >
-              </Route>
-
-
-
+              ></Route>
             </Routes>
           </div>
         </div>
 
       </Router>
-
-
-     
-
-
-     
-      
     </ApolloProvider>
   );
 }
