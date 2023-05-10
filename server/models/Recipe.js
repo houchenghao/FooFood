@@ -31,6 +31,11 @@ const recipeSchema = new Schema({
 
     imageLink: {
         type: String,
+    },
+
+    image: {
+        data: Buffer,
+        contentType: "String"
     }
 });
 

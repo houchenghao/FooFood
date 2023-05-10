@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+// import axios from 'axios'
 
 
 
@@ -12,9 +13,18 @@ const AddrecipeForm = () => {
     const[recipeName, setRecipeName] = useState('');
     const[recipeDescription, setRecipeDescription] = useState('');
     const[imageLink, setImageLink] = useState('');
+    const[image, setImage] = useState('')
 
 
     const [addRecipe, { error }] = useMutation(ADD_RECIPE);
+
+
+    const imageUpload = (event) => {
+        console.log(event.target.files[0]);
+        setImage(event.target.files[0]);
+        console.log(image)
+
+    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -28,12 +38,17 @@ const AddrecipeForm = () => {
             variables: {
                 recipeName,
                 recipeDescription,
-                imageLink
+                imageLink,
+                image,
             },
             });
             setRecipeName('');
             setRecipeDescription('');
             setImageLink('');
+
+            setImage(null)
+
+
         } catch (err) {
         console.error(err);
         };
@@ -83,6 +98,18 @@ const AddrecipeForm = () => {
                     style={{ lineHeight: '1.5', resize: 'vertical' }}
                     onChange={handleChange}
                 ></input>
+
+                <label> Upload Image</label>
+                <input
+                    type = "file"   
+                    name = "myFile"
+                    value={imageLink}
+                    className="form-control"
+                    // style={{ lineHeight: '1.5', resize: 'vertical' }}
+                    // autoComplete="off"
+                    onChange={imageUpload}
+                ></input>
+                
 
             </div>
 

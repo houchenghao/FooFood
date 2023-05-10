@@ -37,8 +37,8 @@ export const ADD_COMMENT = gql`
 `;
 
 export const ADD_RECIPE = gql`
-mutation AddRecipe($recipeName: String!, $recipeDescription: String!, $imageLink: String!) {
-  addRecipe(recipeName: $recipeName, recipeDescription: $recipeDescription, imageLink: $imageLink) {
+mutation AddRecipe($recipeName: String!, $recipeDescription: String!, $imageLink: String!, $image:Upload) {
+  addRecipe(recipeName: $recipeName, recipeDescription: $recipeDescription, imageLink: $imageLink, image: $image) {
     _id
     recipeDescription
     recipeName
