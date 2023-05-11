@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-// import axios from 'axios'
-
-
+import axios from 'axios';
 
 import Auth from '../../utils/auth';
 
 import { ADD_RECIPE } from '../../utils/mutations';
 
 const AddrecipeForm = () => {
+
+    // useEffect(() => {
+
+    //     <Navigate to= '/me'/>
+ 
+    // })
+
+    const Host = 'http://localhost:3000'
+
     const[recipeName, setRecipeName] = useState('');
     const[recipeDescription, setRecipeDescription] = useState('');
     const[imageLink, setImageLink] = useState('');
     const[image, setImage] = useState('')
+    const[fileInputKey, setFileInputKey] = useState(Date.now())
 
+    
 
-    const [addRecipe, { error }] = useMutation(ADD_RECIPE);
+    const [addRecipe, { loading:addRecipeLoading }] = useMutation(ADD_RECIPE);
 
-
-    const imageUpload = (event) => {
-        console.log(event.target.files[0]);
-        setImage(event.target.files[0]);
-        console.log(image)
-
-    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -34,25 +36,44 @@ const AddrecipeForm = () => {
         console.log(imageLink);
 
         try {
-        const { data } = await addRecipe({
-            variables: {
-                recipeName,
-                recipeDescription,
-                imageLink,
-                image,
-            },
+
+            const { data } = await addRecipe({
+                variables: {
+                    recipeName,
+                    recipeDescription,
+                    imageLink,
+                },
             });
+
+            if (!addRecipeLoading){
+                
+                const recipeData = data?.addRecipe
+                const formData = new FormData()
+                
+                formData.append('recipeId', recipeData._id)
+                if(image){
+                    formData.append('image', image, `${recipeData._id}.png`)
+                }
+                
+
+                axios.post(`${Host}/upload`,
+                formData,
+                {   
+                    headers: {'Authorization': localStorage.getItem('token')}
+                }
+            )
+            }
             setRecipeName('');
             setRecipeDescription('');
             setImageLink('');
-
-            setImage(null)
-
+            setImage(null);
+            setFileInputKey(Date.now());
 
         } catch (err) {
         console.error(err);
         };
     };
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -63,9 +84,11 @@ const AddrecipeForm = () => {
             setRecipeDescription(value);
         }else if (name === 'imageLink') {
             setImageLink(value);
+        }else if (name === 'image') {
+            setImage(event.target.files[0]);
         }
-
     };
+
 
     return (
         <form className="flex-row justify-center justify-space-between-md align-center"
@@ -99,15 +122,17 @@ const AddrecipeForm = () => {
                     onChange={handleChange}
                 ></input>
 
+
                 <label> Upload Image</label>
                 <input
                     type = "file"   
-                    name = "myFile"
-                    value={imageLink}
+                    name = "image"
+                    key = {fileInputKey}
+                    
                     className="form-control"
                     // style={{ lineHeight: '1.5', resize: 'vertical' }}
                     // autoComplete="off"
-                    onChange={imageUpload}
+                    onChange={handleChange}
                 ></input>
                 
 
