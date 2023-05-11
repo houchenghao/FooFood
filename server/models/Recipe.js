@@ -33,10 +33,6 @@ const recipeSchema = new Schema({
         type: String,
     },
 
-    image: {
-        data: Buffer,
-        contentType: "String"
-    }
 });
 
 const Recipe = model('Recipe', recipeSchema);
