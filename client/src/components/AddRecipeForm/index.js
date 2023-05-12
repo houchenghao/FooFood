@@ -15,7 +15,7 @@ const AddrecipeForm = () => {
  
     // })
 
-    const Host = 'http://localhost:3000'
+    const Host = 'https://sleepy-beach-76530.herokuapp.com'
 
     const[recipeName, setRecipeName] = useState('');
     const[recipeDescription, setRecipeDescription] = useState('');
