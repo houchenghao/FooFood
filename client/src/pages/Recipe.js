@@ -40,6 +40,7 @@ const Recipe = () => {
 
                         <Link to = {`/profile/${recipe.userId.username}`}>
                             Check {recipe.userId.username}'s other recipes
+                            
                         </Link>
                         
                     </div>
