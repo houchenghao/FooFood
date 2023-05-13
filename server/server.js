@@ -6,8 +6,9 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const multer = require('multer');
+// const multer = require('multer');
 const {Image} = require('./models')
+const uploadImage = require('./utils/uploadImage.js')
 
 
 const PORT = process.env.PORT || 3001;
@@ -23,11 +24,11 @@ const server = new ApolloServer({
 });
 
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true },{ limit: "25mb"}));
+app.use(express.json({ limit: "25mb"}));
 
 
-app. use('/uploads', express.static('uploads'))
+// app. use('/uploads', express.static('uploads'))
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -36,36 +37,42 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.originalname)
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//     cb(null, file.originalname)
+//   }
+// })
 
-const upload = multer({ storage: storage })
+// const upload = multer({ storage: storage })
 
-app.post('/upload', upload.single('image'), (req, res) => {
-  console.log('start upload')
-  console.log(req.file.filename)
-  const saveImage = new Image ({
-    // name:req.body.name,
-    recipeId:req.body.recipeId,
-    img:{
-      data: fs.readFileSync('uploads/'+ req.file.filename),
-      // data: fs.readFileSync('uploads/'+ req.body.recipeId),
-      contentType: 'image/png'
-    }
-  });
-  saveImage.save()
-  .then(res.status(200).json({message: `uploaded image`}))
-  .catch((err) => {
-    console.log(err, "error has occur")
-  })
+// app.post('/upload', upload.single('image'), (req, res) => {
+//   console.log('start upload')
+//   console.log(req.file.filename)
+//   const saveImage = new Image ({
+//     // name:req.body.name,
+//     recipeId:req.body.recipeId,
+//     img:{
+//       data: fs.readFileSync('uploads/'+ req.file.filename),
+//       // data: fs.readFileSync('uploads/'+ req.body.recipeId),
+//       contentType: 'image/png'
+//     }
+//   });
+//   saveImage.save()
+//   .then(res.status(200).json({message: `uploaded image`}))
+//   .catch((err) => {
+//     console.log(err, "error has occur")
+//   })
 
+// });
+
+app.post('/uploadImage', (req,res) => {
+  uploadImage(req.body.image)
+    .then((url) => res.send(url))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get('/', (req, res) => {

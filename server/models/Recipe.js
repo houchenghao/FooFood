@@ -32,7 +32,6 @@ const recipeSchema = new Schema({
     imageLink: {
         type: String,
     },
-
 });
 
 const Recipe = model('Recipe', recipeSchema);
