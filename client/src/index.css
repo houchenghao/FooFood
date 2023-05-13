@@ -1,24 +1,125 @@
-.home-page-recipe-card {
+.viewport-background {
+    background-image: url("../assets/images/background.png");
+    background-size:cover;
+    background-color: #8bc7be83;
+    height: 80vh;
+
+}
+
+.header-background {
+    background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header-welcome-font {
+    font-family: cursive;
+    font-weight: bold;
+    font-size:x-large;
+    color: #1013e4f8;
+    text-decoration: none;
+    padding-right: 50px;
+
+}
+
+.header-font-family {
+    font-family: fantasy;
+    font-size:50px;
+    text-decoration: none;
+    font-style: italic;
+    color:#d12525; 
+    /* border-Radius: '5px'; */
+    padding: '8px 16px';
+    display: 'inline-block'; 
+}
+
+.login-flex{
+    display: flex;
+    justify-content: center;
+}
+.login-container {
+    width: 50%;
+}
+
+
+.home-page-recipe-container {
     display: flex;
     flex-wrap: wrap;
+    margin: 10px;
     justify-content: center;
 }
 
-
-.home-page-recipe {
-    margin: 10px;
-    text-align: left;
-}
-
-.home-page-recipe-image{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
 .home-page-recipe-name {
-    font-size: 1.2rem;
-    margin-top: 10px;
     font-family: cursive;
+    text-decoration: none;
+    color: rgb(20, 22, 21);
+    font-weight: bolder;
+}
+
+.add-recipe-form-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.add-recipe-form-description {
+    height: 200px;
+}
+
+.profile-card {
+    display: flex;
+}
+
+.profile-image-container {
+    width: 60%;
+    /* padding-left: 100px; */
+    /* height: 300px; */
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    /* padding-left: 20px; */
+}
+.profile-image {
+    width:90%
+}
+
+.profile-text {
+    font-size:x-large;
+}
+
+.others-profile-text {
+    padding-left: 20px;
+    font-family: cursive;
+    text-decoration:none;
+}
+
+.comment-container {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    height:200px;
+    overflow-y: auto;
+}
+
+.comment-card {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.comment{
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.comment-font{
+    font-size: large;
+    overflow:scroll;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 716px){
+    .profile-card {
+        flex-direction: column;
+    }
 }

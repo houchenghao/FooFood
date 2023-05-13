@@ -17,10 +17,6 @@ const Profile = ({addRecipeList}) => {
   });
 
   const recipes = data?.meRecipes || data?.userRecipes || {};
-  // navigate to personal profile page if username is yours
-  // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-  //   return <Navigate to="/me" />;
-  // }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -29,10 +25,22 @@ const Profile = ({addRecipeList}) => {
   if (!Auth.loggedIn()) {
     return (
       <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
+        You need to be logged in to see this.
       </h4>
     );
+  }
+
+  console.log(recipes)
+  if (recipes.length ===0) {
+    return(
+        <div>
+          <h1> Add You Recipes</h1>
+          <div>
+            <AddRecipeForm/>
+          </div>
+        </div>
+
+    )
   }
 
   return (
@@ -41,15 +49,12 @@ const Profile = ({addRecipeList}) => {
             <RecipesList recipes = {recipes}/>
         </div>
 
-        
         {(addRecipeList) ? (
-                <div>
-                    <AddRecipeForm/>
-                </div>
+          <div>
+              <AddRecipeForm/>
+          </div>
         ) :(
-                <div>
-                    
-                </div>
+          <div></div>
         )}
     </div>
   );

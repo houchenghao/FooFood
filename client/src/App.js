@@ -1,8 +1,3 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-// import { setContext } from '@apollo/client/link/context';
-
 import React from 'react';
 import {
   ApolloClient,
@@ -36,7 +31,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
@@ -47,9 +41,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <div style={{ backgroundColor: '#8bc7be83', minHeight: '100vh' }}>
+        
           <Header/>
-          <div>
+          <div className='viewport-background'>
             <Routes>
               <Route
                 path="/"
@@ -82,12 +77,8 @@ function App() {
               ></Route>
             </Routes>
           </div>
-
-
         </div>
-
       </Router>
-
     </ApolloProvider>
   );
 }

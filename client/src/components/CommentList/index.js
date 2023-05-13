@@ -1,21 +1,33 @@
 import React from 'react';
+import { Card } from 'antd';
 
-const CommentList = ({comments}) => {
+// const CommentList = ({comments}) => {
+//     return (
+//         <div>
+//             {comments.map((comment) => {
+//                 return (
+//                     <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
+//                 )
+//             })}
+//         </div>
+//     )
+// };
+
+
+const CommentList = ({ comments }) => {
     return (
-        <div>
-            {comments.map((comment) => {
+        <div className='comment-container'>
+            <div className='comment-card'>
+                {comments.map((comment) => (
+                    <Card key={comment._id} >
+                        <div className='comment-text'>{comment.commentText}</div>
+                    </Card>
+                ))}
+            </div>
 
-                return (
-
-                    <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
-                )
-            })}
-
-            
         </div>
-        
 
-        
-    )
+    );
 };
+
 export default CommentList;

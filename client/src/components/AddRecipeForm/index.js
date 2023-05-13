@@ -3,9 +3,17 @@ import { Link, Navigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import axios from 'axios';
 
-import Auth from '../../utils/auth';
 
+// import { Upload, Button, Input, Form, Card } from 'antd';
+// import { UploadOutlined } from '@ant-design/icons';
+
+import { Upload, Button, Input, Form, Card } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
+import Auth from '../../utils/auth';
 import { ADD_RECIPE } from '../../utils/mutations';
+
+const { TextArea } = Input;
 
 const AddrecipeForm = () => {
     const[recipeName, setRecipeName] = useState('');
@@ -59,19 +67,19 @@ const AddrecipeForm = () => {
     //     // uploadMultipleImages(base64s);
     // };
 
-    useEffect(() => {
-        console.log(recipeloading);
+    // useEffect(() => {
+    //     console.log(recipeloading);
 
-        // const { data } = addRecipe({
-        //     variables: {
-        //         recipeName,
-        //         recipeDescription,
-        //         imageLink,
-        //     },
-        // });
+    //     // const { data } = addRecipe({
+    //     //     variables: {
+    //     //         recipeName,
+    //     //         recipeDescription,
+    //     //         imageLink,
+    //     //     },
+    //     // });
 
         
-      }, [recipeloading]);
+    //   }, [recipeloading]);
 
 
     function uploadSingleImage(image) {
@@ -163,63 +171,73 @@ const AddrecipeForm = () => {
         }
     };
 
+    if (!Auth.loggedIn()) {
+        return (
+          <h4>
+            You need to be logged in to see this.
+          </h4>
+        );
+    }
 
     return (
-        <form className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}>
+        <div className='add-recipe-form-container' >
+                <form className="flex-row justify-center justify-space-between-md align-center"
+                onSubmit={handleFormSubmit}>
 
-            <div className="col-12 col-lg-9">
-                <input
-                    name = "recipeName"
-                    placeholder="Add your recipe name"
-                    value={recipeName}
-                    className="form-input w-100"
-                    style={{ lineHeight: '1.5', resize: 'vertical' }}
-                    onChange={handleChange}
-                ></input>
+                <div className="col-12 col-lg-9">
+                    <input
+                        name = "recipeName"
+                        placeholder="Add your recipe name"
+                        value={recipeName}
+                        className="form-input w-100"
+                        style={{ lineHeight: '1.5', resize: 'vertical' }}
+                        onChange={handleChange}
+                    ></input>
 
-                <textarea
-                    name = "recipeDescription"
-                    placeholder = "Add you Description"
-                    value = {recipeDescription}
-                    className = "form-input w-100"
-                    style={{ lineHeight: '1.5', resize: 'vertical' }}
-                    onChange={handleChange}
-                ></textarea>
+                    <textarea
+                        name = "recipeDescription"
+                        placeholder = "Add you Description"
+                        value = {recipeDescription}
+                        className = "form-input w-100"
+                        // style={{ lineHeight: '1.5', resize: 'vertical' }}
+                        style={{ height: '300px', lineHeight: '1.5', resize: 'vertical' }}
+                        onChange={handleChange}
+                    ></textarea>
 
-                {/* <input
-                    name = "imageLink"
-                    placeholder="Add your recipe image link"
-                    value={imageLink}
-                    className="form-input w-100"
-                    style={{ lineHeight: '1.5', resize: 'vertical' }}
-                    // onChange={handleChange}
-                ></input> */}
+                    {/* <input
+                        name = "imageLink"
+                        placeholder="Add your recipe image link"
+                        value={imageLink}
+                        className="form-input w-100"
+                        style={{ lineHeight: '1.5', resize: 'vertical' }}
+                        // onChange={handleChange}
+                    ></input> */}
 
-                <label> Upload Image</label>
-                <input
-                    type = "file"   
-                    name = "image"
-                    key = {fileInputKey}
-                    className="hidden"
-                    // style={{ lineHeight: '1.5', resize: 'vertical' }}
-                    // autoComplete="off"
-                    onChange={handleChange}
-                ></input>
-                
-            </div>
+                    <label> Upload Image</label>
+                    <input
+                        type = "file"   
+                        name = "image"
+                        key = {fileInputKey}
+                        className="hidden"
+                        // style={{ lineHeight: '1.5', resize: 'vertical' }}
+                        // autoComplete="off"
+                        onChange={handleChange}
+                    ></input>
+                </div>
 
-            <div className="col-12 col-lg-3">
-                <button className="btn btn-primary btn-block py-3" type="submit">
-                    Add TO MY RECIPE LIST
-                </button>
-            </div>
-        </form>
-
+                <div className="col-12 col-lg-3">
+                    <button className="btn btn-primary btn-block py-3" type="submit">
+                        Add TO MY RECIPE LIST
+                    </button>
+                </div>
+            </form>
+        </div>
     )
-
-    
 }
 
 export default AddrecipeForm;
+
+
+
+
 

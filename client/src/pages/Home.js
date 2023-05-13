@@ -15,13 +15,15 @@ const Home = () => {
         return <div> Loading...</div>
     }
 
+    if (!recipes) {
+        return(
+            <p> Add you recipes</p>
+        )
+    }
+
     return (
         <main>
-            <div>
-                popular food see recipe
-            </div>
-
-            <div className='home-page-recipe-card'>
+            <div >
                 <RecipeList recipes = {recipes}/>
             </div>
         </main>

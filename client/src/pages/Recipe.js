@@ -23,6 +23,9 @@ const Recipe = () => {
 
     const comments = commentData?.recipeComment || {};
 
+    
+
+
     if(recipeLoading||commentLoading) {
         return <div>Loading...</div>
     }
@@ -32,19 +35,24 @@ const Recipe = () => {
     return(
         <div>
             <div>
-                <div key = {recipe._id} className='home-page-recipe'>
-                    <img className='home-page-recipe-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
-                    <h2 className='home-page-recipe-name'> {recipe.recipeName} </h2>
-                    <p>{recipe.recipeDescription}</p>
-                    <div>
+                <div key = {recipe._id} className='profile-card'>
+                    <div className='profile-image-container'>
+                        <img className='p-3 col-12 col-md-6 col-lg-4 mb-4' src = {recipe.imageLink} alt = {recipe.recipeName}/>
 
-                        <Link to = {`/profile/${recipe.userId.username}`}>
-                            Check {recipe.userId.username}'s other recipes
-                            
-                        </Link>
-                        
+                    </div>
+
+                    <div>
+                        <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>
+                        <p className='profile-text'>{recipe.recipeDescription}</p>
                     </div>
                 </div>   
+
+
+                <div>
+                    <Link to = {`/profile/${recipe.userId.username}`} className='p-5 text-decoration-none'>
+                        <h2 className='others-profile-text' > See {recipe.userId.username}'s recipes</h2>
+                    </Link>
+                </div>
             </div>
 
             <div>
@@ -61,6 +69,8 @@ const Recipe = () => {
             
         </div>
     )
+
+    
 };
 
 export default Recipe;
