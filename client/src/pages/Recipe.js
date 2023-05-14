@@ -28,15 +28,7 @@ const Recipe = () => {
         }
     }, [checkoutData]);
 
-    function submitCheckout() {
-        // const productIds = [];
-    
-        // state.cart.forEach((item) => {
-        //   for (let i = 0; i < item.purchaseQuantity; i++) {
-        //     productIds.push(item._id);
-        //   }
-        // });
-    
+    function submitCheckout() {  
         getCheckout({
           variables: { products: recipe._id },
         });
