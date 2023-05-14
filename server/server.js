@@ -36,7 +36,7 @@ app.post('/uploadImage', (req,res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
