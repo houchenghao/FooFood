@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Comment, Recipe} = require('../models');
+const { User, Comment, Recipe, Order} = require('../models');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
     Query: {
@@ -40,7 +41,37 @@ const resolvers = {
                 const userRecipes = await Recipe.find({ userId: user._id }).populate('userId');
                 return userRecipes;
             }
-        }
+        },
+
+        checkout: async (parent, args, context) => {
+            const url = new URL(context.headers.referer).origin;
+            const line_items = [];
+              const product = await stripe.products.create({
+                name: "charitable_donations",
+                description: "charitable_donations",
+                images: [`https://img2.baidu.com/it/u=2431494492,704089806&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500`]
+              });
+
+              const price = await stripe.prices.create({
+                product: product.id,
+                unit_amount: 500,
+                currency: 'usd',
+              });
+      
+              line_items.push({
+                price: price.id,
+                quantity: 1
+              });
+            const session = await stripe.checkout.sessions.create({
+              payment_method_types: ['card'],
+              line_items,
+              mode: 'payment',
+              success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+              cancel_url: `${url}/`
+            });
+            console.log("checkout server end")
+            return { session: session.id };
+          }
     },
 
     Mutation: {

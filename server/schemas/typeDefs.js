@@ -31,6 +31,10 @@ type User {
         user:User
     }
 
+    type Checkout {
+        session: ID
+    }
+
     type Query{
         meRecipes:[Recipe]
         users:[User]
@@ -39,6 +43,8 @@ type User {
         comments:[Comment]
         recipeComment(recipeId:ID!): [Comment]
         userRecipes(username:String!):[Recipe]
+
+        checkout(products: ID!): Checkout
     }
 
     type Mutation{

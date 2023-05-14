@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+import { loadStripe } from '@stripe/stripe-js';
+import { useLazyQuery } from '@apollo/client';
 
-import { QUERY_RECIPES, QUERY_SINGLE_RECIPE, QUERY_RECIPE_COMMENTS } from '../utils/queries';
+import { QUERY_RECIPES, QUERY_SINGLE_RECIPE, QUERY_RECIPE_COMMENTS, QUERY_CHECKOUT  } from '../utils/queries';
 import {UPDATE_RECIPE_DESCREPTION, DELETE_RECIPE} from '../utils/mutations'
 
 import Auth from '../utils/auth';
@@ -10,16 +12,43 @@ import Auth from '../utils/auth';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList'
 
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+
+
 
 const Recipe = () => {
+    const [getCheckout , {data:checkoutData}] = useLazyQuery(QUERY_CHECKOUT)
+
+    useEffect(() => {
+        if (checkoutData) {
+        stripePromise.then((res) => {
+            res.redirectToCheckout({ sessionId: checkoutData.checkout.session });
+        });
+        }
+    }, [checkoutData]);
+
+    function submitCheckout() {
+        // const productIds = [];
+    
+        // state.cart.forEach((item) => {
+        //   for (let i = 0; i < item.purchaseQuantity; i++) {
+        //     productIds.push(item._id);
+        //   }
+        // });
+    
+        getCheckout({
+          variables: { products: recipe._id },
+        });
+      }
+
+
     const[recipeDescription, setRecipeDescription] = useState('');
-    
-    const { recipeId: userParam } = useParams();
-    
+    const { recipeId: userParam } = useParams(''); 
     const { loading:recipeLoading, data:recipeData } = useQuery(userParam ? QUERY_SINGLE_RECIPE : QUERY_RECIPES, {
         variables: {recipeId: userParam}
     });  
-    const recipe = recipeData?.recipe || {};
+    // const recipe = recipeData?.recipe || {};
 
     const { loading:commentLoading, data:commentData } = useQuery(QUERY_RECIPE_COMMENTS,{
         variables: {recipeId:userParam}
@@ -28,26 +57,20 @@ const Recipe = () => {
     const [updateRecipeDescription, { error: updateRecipeDescriptionError}] = useMutation(UPDATE_RECIPE_DESCREPTION);
     const [deleteRecipe, {error: deleteRecipeError} ] = useMutation(DELETE_RECIPE);
 
-
-    const comments = commentData?.recipeComment || {};
-
-    // useEffect(() => {
-    //     if (recipe && recipe.recipeDescription) {
-    //       setRecipeDescription(recipe.recipeDescription);
-    //     }
-    //   }, []);
-
+    // const comments = commentData?.recipeComment || {};
 
     if(recipeLoading||commentLoading) {
         return <div>Loading...</div>
     }
+
+    const recipe = recipeData?.recipe || {};
+    const comments = commentData?.recipeComment || {};
 
     const handleChange = (event) => {
         // const { name, value } = event.target;
         setRecipeDescription(event.target.value)
         console.log(recipeDescription)
       };
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -79,6 +102,16 @@ const Recipe = () => {
     return(
         <div>
             <div>
+                <div>
+                    {Auth.loggedIn() ? (
+                    <button onClick={submitCheckout}>Checkout</button>
+                    ) : (
+                    <span>(log in to check out)</span>
+                    )}
+                </div>
+
+
+
                 <div key = {recipe._id} className='profile-card'>
 
                     <div className='profile-image-container'>
