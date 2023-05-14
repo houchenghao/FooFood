@@ -7,6 +7,7 @@ import AddRecipeForm from '../components/AddRecipeForm'
 
 import { QUERY_USER_RECIPES, QUERY_ME_RECIPES } from '../utils/queries';
 
+
 import Auth from '../utils/auth';
 
 const Profile = ({addRecipeList}) => {
@@ -21,6 +22,8 @@ const Profile = ({addRecipeList}) => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  // const recipes = data?.meRecipes || data?.userRecipes || {};
   
   if (!Auth.loggedIn()) {
     return (
@@ -30,7 +33,7 @@ const Profile = ({addRecipeList}) => {
     );
   }
 
-  console.log(recipes)
+  
   if (recipes.length ===0) {
     return(
       <div>
@@ -41,8 +44,7 @@ const Profile = ({addRecipeList}) => {
       </div>
     )
   } else {
-    console.log('has recipe')
-    console.log(addRecipeList)
+
     return (
       <div>
           <div>

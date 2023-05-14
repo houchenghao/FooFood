@@ -1,28 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_RECIPES, QUERY_SINGLE_RECIPE, QUERY_RECIPE_COMMENTS } from '../utils/queries';
-
-import { Input, Button, Typography, Card } from 'antd';
-
-
+import {UPDATE_RECIPE_DESCREPTION, DELETE_RECIPE} from '../utils/mutations'
 
 import Auth from '../utils/auth';
-
 
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList'
 
-const { TextArea } = Input;
 
 const Recipe = () => {
-    const[recipeDescription, setDescriptionState] = useState('');
-
+    const[recipeDescription, setRecipeDescription] = useState('');
     
     const { recipeId: userParam } = useParams();
     
-
     const { loading:recipeLoading, data:recipeData } = useQuery(userParam ? QUERY_SINGLE_RECIPE : QUERY_RECIPES, {
         variables: {recipeId: userParam}
     });  
@@ -32,57 +25,78 @@ const Recipe = () => {
         variables: {recipeId:userParam}
     });
 
+    const [updateRecipeDescription, { error: updateRecipeDescriptionError}] = useMutation(UPDATE_RECIPE_DESCREPTION);
+    const [deleteRecipe, {error: deleteRecipeError} ] = useMutation(DELETE_RECIPE);
+
+
     const comments = commentData?.recipeComment || {};
 
-    useEffect(() => {
-        setDescriptionState(recipe.recipeDescription);
-        // console.log(recipe)
-      }, [recipe]);
+    // useEffect(() => {
+    //     if (recipe && recipe.recipeDescription) {
+    //       setRecipeDescription(recipe.recipeDescription);
+    //     }
+    //   }, []);
 
-   
+
     if(recipeLoading||commentLoading) {
         return <div>Loading...</div>
     }
 
-
-
     const handleChange = (event) => {
         // const { name, value } = event.target;
-        setDescriptionState(event.target.value)
+        setRecipeDescription(event.target.value)
         console.log(recipeDescription)
       };
 
 
     const handleFormSubmit = async (event) => {
-        event.preventDfault();
-        const { name, value } = event.target;
+        event.preventDefault();
+        try{
+            const { data } = await updateRecipeDescription({
+                variables:{recipeId: recipe._id, recipeDescription}
+            })
+            
+        } catch(err) {
+            console.error(err);
+        }
     }
 
     const deleteRecipeHandle = async (event) => {
-        event.preventDfault();
+        event.preventDefault();
+        console.log("delete");
+        try{
+            const { data } = await deleteRecipe({
+                variables: { recipeId: recipe._id}
+            })
+            console.log(data);
+            window.location.replace('/me');
+
+        } catch(err) {
+            console.error(err);
+        }
     }
 
     return(
         <div>
             <div>
                 <div key = {recipe._id} className='profile-card'>
+
                     <div className='profile-image-container'>
                         <img className='p-3 col-12 col-md-6 col-lg-4 mb-4' src = {recipe.imageLink} alt = {recipe.recipeName}/>
-
                     </div>
                     
                     <form onSubmit={handleFormSubmit}>
-
                         <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>
+                        
                         <textarea 
                             name = 'recipeDescription'
                             className='profile-text'
-                            defaultValue={recipeDescription}
+                            defaultValue={recipe.recipeDescription}
                             onChange={handleChange}
                         ></textarea>
 
                         <div>
-                            <button 
+                            <button
                                 className="btn btn-primary btn-block py-1"
                                 type="submit"
                                 style={{backgroundColor: '#948080',border:'none'}}>
@@ -94,15 +108,11 @@ const Recipe = () => {
                     <button 
                         className="btn btn-primary btn-block py-1"
                         onClick={deleteRecipeHandle}
+                        type="button"
                         style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
                         Delete
                     </button>
-                    {/* <div>
-                        <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>
-                        <textarea className='profile-text'defaultValue={recipe.recipeDescription}></textarea>
-                    </div> */}
                 </div>   
-
 
                 <div>
                     <Link to = {`/profile/${recipe.userId.username}`} className='p-5 text-decoration-none'>

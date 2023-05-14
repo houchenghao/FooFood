@@ -38,7 +38,6 @@ type User {
         recipe(recipeId:ID!):Recipe
         comments:[Comment]
         recipeComment(recipeId:ID!): [Comment]
-
         userRecipes(username:String!):[Recipe]
     }
 
@@ -46,12 +45,10 @@ type User {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addComment(recipeId: ID!, commentText: String!): Comment
-        
         addRecipe(recipeName: String!, recipeDescription: String! imageLink: String!): Recipe
+        updateRecipeDescription(recipeId: ID!, recipeDescription: String!): Recipe
 
-        
         removeRecipe(recipeId: ID!): Recipe
-        removeComment(commentId: ID!): Comment
     }
 
 `

@@ -85,6 +85,34 @@ const resolvers = {
                 return recipe;
             }
         },
+
+        updateRecipeDescription: async(parent, {recipeId, recipeDescription},context) => {
+            if (context.user) {
+                return Recipe.findOneAndUpdate(
+                    { _id: recipeId },
+                    {
+                        $set: {
+                            recipeDescription: recipeDescription
+                        }
+                    },
+                    { new: true}
+                )
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeRecipe: async(parent, {recipeId}, context) => {
+            if (context.user) {
+                const recipe = await Recipe.findOneAndDelete({
+                    _id: recipeId,
+                    userId: context.user._id
+                })
+
+                // const deletedComments = await Comment.deleteMany({ recipeId });
+                return recipe
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 }
 
