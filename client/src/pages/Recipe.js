@@ -15,8 +15,6 @@ import CommentList from '../components/CommentList'
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 
-
-
 const Recipe = () => {
     const [getCheckout , {data:checkoutData}] = useLazyQuery(QUERY_CHECKOUT)
 
@@ -101,8 +99,6 @@ const Recipe = () => {
                     <span>(log in to check out)</span>
                     )}
                 </div>
-
-
 
                 <div key = {recipe._id} className='profile-card'>
 

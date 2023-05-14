@@ -36,8 +36,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div style={{ backgroundColor: '#8bc7be83', minHeight: '100vh' }} className='viewport-background-color '>
-        
+        {/* <div style={{ backgroundColor: '#8bc7be83', minHeight: '100vh' }} className='viewport-background-color '> */}
           <Header/>
           <div className='viewport-background'>
             <Routes>
@@ -72,7 +71,7 @@ function App() {
               ></Route>
             </Routes>
           </div>
-        </div>
+        {/* </div> */}
       </Router>
     </ApolloProvider>
   );
