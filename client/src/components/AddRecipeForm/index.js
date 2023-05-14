@@ -136,7 +136,6 @@ const AddrecipeForm = () => {
             
             setRecipeName('');
             setRecipeDescription('');
-            // setImageLink('');
             setFileInputKey(Date.now());
             setImage(null);
             setRecipeLoading(false);

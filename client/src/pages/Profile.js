@@ -33,31 +33,32 @@ const Profile = ({addRecipeList}) => {
   console.log(recipes)
   if (recipes.length ===0) {
     return(
+      <div>
+        <h1> Add You Recipes</h1>
         <div>
-          <h1> Add You Recipes</h1>
-          <div>
-            <AddRecipeForm/>
-          </div>
+          <AddRecipeForm/>
         </div>
-
+      </div>
     )
-  }
-
-  return (
-    <div>
-        <div>
-            <RecipesList recipes = {recipes}/>
-        </div>
-
-        {(addRecipeList) ? (
+  } else {
+    console.log('has recipe')
+    console.log(addRecipeList)
+    return (
+      <div>
           <div>
-              <AddRecipeForm/>
+              <RecipesList recipes = {recipes}/>
           </div>
-        ) :(
-          <div></div>
-        )}
-    </div>
-  );
+  
+          {(addRecipeList) ? (
+            <div>
+                <AddRecipeForm/>
+            </div>
+          ) :(
+            <div></div>
+          )}
+      </div>
+    );
+  }
 };
 
 export default Profile;
