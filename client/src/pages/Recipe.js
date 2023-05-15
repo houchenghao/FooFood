@@ -76,7 +76,6 @@ const Recipe = () => {
 
     const deleteRecipeHandle = async (event) => {
         event.preventDefault();
-        console.log("delete");
         try{
             const { data } = await deleteRecipe({
                 variables: { recipeId: recipe._id}
@@ -93,84 +92,84 @@ const Recipe = () => {
         <div>
             <div>
                 <div>
-                    {Auth.loggedIn() ? (
-                    <button onClick={submitCheckout}>Checkout</button>
+                    {Auth.getProfile().data._id !== recipe.userId._id ? (
+                    <button onClick={submitCheckout} className='like-food-button'>Like This Food $5$ ?</button>
                     ) : (
-                    <span>(log in to check out)</span>
+                    <span></span>
                     )}
                 </div>
 
-                <div key = {recipe._id} className='profile-card'>
-
+                <div className='image-form-container'>
                     <div className='profile-image-container'>
-                        <img className='p-3 col-12 col-md-6 col-lg-4 mb-4' src = {recipe.imageLink} alt = {recipe.recipeName}/>
+                        <img className='p col-12 col-md-6 col-lg-4 mb-4 profile-image' src = {recipe.imageLink} alt = {recipe.recipeName}/>
                     </div>
-                    
-                    <form onSubmit={handleFormSubmit}>
-                        <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>
-                        
 
-                        {Auth.getProfile().data._id === recipe.userId._id ? (
-                            <textarea 
-                                name = 'recipeDescription'
-                                className='profile-text'
-                                defaultValue={recipe.recipeDescription}
-                                onChange={handleChange}
-                            ></textarea>
+                    <div key = {recipe._id} className='profile-card'> 
+                        <form onSubmit={handleFormSubmit} className='p-5'>
+                            <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>   
+                            {Auth.getProfile().data._id === recipe.userId._id ? (
+                                <textarea 
+                                    name = 'recipeDescription'
+                                    className='profile-text'
+                                    defaultValue={recipe.recipeDescription}
+                                    onChange={handleChange}
+                                ></textarea>
+                            ) : (
+                                <div className='recipe-description-container'>
+                                    {recipe.recipeDescription}
+                                </div>
+                            )}
+                            {Auth.getProfile().data._id === recipe.userId._id ?(    
+                                <div>
+                                    <button
+                                        className="btn btn-primary btn-block py-1"
+                                        type="submit"
+                                        style={{backgroundColor: '#948080',border:'none', marginRight:'10px'}}>
+                                        Update
+                                    </button>
+                                    
+                                    <button 
+                                        className="btn btn-primary btn-block py-1"
+                                        onClick={deleteRecipeHandle}
+                                        type="button"
+                                        style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
+                                        Delete
+                                    </button>
+                                </div>                
+                                ):(
+                                    <div></div>
+                                )
+                            } 
+                        </form>
+                    </div>
+                </div>             
 
-                        ) : (
-                            <p>
-                            {recipe.recipeDescription}
-                            </p>
-                        )}
+                {Auth.getProfile().data._id !== recipe.userId._id ? (
+                    <div>
+                        <Link to = {`/profile/${recipe.userId.username}`} className='p-5 text-decoration-none'>
+                            <h1 className='others-profile-text' > See {recipe.userId.username}'s recipes</h1>
+                        </Link>
+                    </div>
+                    ):(
+                        <span></span>
+                    )
+                }
 
-                        <div>
-                            <button
-                                className="btn btn-primary btn-block py-1"
-                                type="submit"
-                                style={{backgroundColor: '#948080',border:'none'}}>
-                                Update
-                            </button>
-                        </div>
-                    </form>
-
-                    {Auth.getProfile().data._id === recipe.userId._id ?(                    
-                        <button 
-                            className="btn btn-primary btn-block py-1"
-                            onClick={deleteRecipeHandle}
-                            type="button"
-                            style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
-                            Delete
-                        </button>):(
-                            <div>
-
-                            </div>
-                        )} 
-                    
-                    
-                    {/* <button 
-                        className="btn btn-primary btn-block py-1"
-                        onClick={deleteRecipeHandle}
-                        type="button"
-                        style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
-                        Delete
-                    </button> */}
-                </div>   
-
-                <div>
-                    <Link to = {`/profile/${recipe.userId.username}`} className='p-5 text-decoration-none'>
-                        <h2 className='others-profile-text' > See {recipe.userId.username}'s recipes</h2>
-                    </Link>
-                </div>
             </div>
 
             <div>
                 <CommentList comments = {comments}/>
             </div>
-                
-            <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-                <CommentForm recipeId={recipe._id} />
-            </div>
+
+
+            {Auth.getProfile().data._id !== recipe.userId._id ? (
+                <div className='p-5'>
+                    <CommentForm recipeId={recipe._id} />
+                </div>
+                ): (
+                    <span></span>
+                )
+            }
         </div>
     )
 };

@@ -1,19 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
 
-// const CommentList = ({comments}) => {
-//     return (
-//         <div>
-//             {comments.map((comment) => {
-//                 return (
-//                     <textarea key = {comment._id} defaultValue={comment.commentText}></textarea>
-//                 )
-//             })}
-//         </div>
-//     )
-// };
-
-
 const CommentList = ({ comments }) => {
     return (
         <div className='comment-container'>

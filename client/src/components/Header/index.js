@@ -26,8 +26,7 @@ const Header = () => {
           {Auth.loggedIn() ? (
             <>
               <Link className="header-welcome-font" to="/me">
-                {/* Welcome {Auth.getProfile().data.username} */}
-                My Profile
+                Hi, {Auth.getProfile().data.username} <br></br>Check your Profile
               </Link>
                 <Button onClick={logout} className="mr-2" shape="round" icon={<LogoutOutlined />}
                   style={{ color: '#282a2b', backgroundColor: '#6475f7', borderColor: '#3c1a9b' }}

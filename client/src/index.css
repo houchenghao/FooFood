@@ -1,10 +1,9 @@
 .viewport-background {
-    background-image: url("../assets/images/background.png");
-    background-size:cover;
+    background-image: url('../src/images/background.png');
     background-color: #8bc7be83;
-    height: 80vh;
+    background-size: cover;
+    min-height: 100vh;
     flex-grow:1;
-
 }
 
 .viewport-background-color {
@@ -52,10 +51,18 @@
     padding: 10px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .recipe-card {
-    height: 25%;
+    width: 280px;
+    height: 280px;
+}
+
+.card-image {
+    height: 200px;
+    width:100%;
+    object-fit: cover;
 }
 
 .home-page-recipe-name {
@@ -64,9 +71,6 @@
     color: rgb(20, 22, 21);
     font-weight: bolder;
 }
-
-
-
 
 
 .add-recipe-form-container {
@@ -84,24 +88,36 @@
 
 .profile-card {
     display: flex;
-    /* background-color: #d12525; */
+}
+
+
+.image-form-container{
+    display: flex;
+    justify-content: center;
 }
 
 .profile-image-container {
-    width: 60%;
-    /* padding-left: 100px; */
-    /* height: 300px; */
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    /* padding-left: 20px; */
+    padding: 30px;
+    width: 40%;
 }
+
 .profile-image {
-    width:90%
+    width:50%
 }
 
 .profile-text {
     font-size:x-large;
+    width: 600px;
+    height: 400px;
+    background-color: beige;
+}
+
+.recipe-description-container{
+    background-color: antiquewhite;
+    width: 480px;
+    min-height: 200px;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .others-profile-text {
@@ -135,10 +151,58 @@
     white-space: nowrap;
 }
 
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #332e53;
+    font-weight: bold;
+    height: 10%;
+
+}
+.image{
+    width: 80px;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.like-food-button {
+    background-color: gold;
+    font-family: cursive;
+    font-size: x-large;
+}
 
 
-@media only screen and (max-width: 716px){
+@media only screen and (max-width: 760px){
     .profile-card {
         flex-direction: column;
     }
+    .add-recipe-form {
+        width: 90%;
+        
+    }
+}
+
+@media only screen and (max-width: 900px){
+    .image-form-container{
+        display:block;
+    }
+
+    .profile-image-container {
+        width: 100%;
+    }
+
+    .profile-text {
+        font-size:large;
+        width: 100%;
+    }
+    
+    .profile-image{
+        width: 80%;
+    }
+    .recipe-description-container {
+        width: 100%;
+    }
+
 }

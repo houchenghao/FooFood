@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Recipe from './pages/Recipe';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -37,46 +38,50 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         {/* <div style={{ backgroundColor: '#8bc7be83', minHeight: '100vh' }} className='viewport-background-color '> */}
-          <Header/>
-          <div className='viewport-background'>
-            <Routes>
-              <Route
-                path="/"
-                element={<Home/>}
-              ></Route>
-
-              <Route
-                path="/signup"
-                element={<Signup/>}
+          <div className='app-container'>
+            <Header/>
+            <div className='viewport-background'>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home/>}
                 ></Route>
 
-              <Route
-                path="/recipe/:recipeId"
-                element={<Recipe/>}
-              ></Route>
+                <Route
+                  path="/signup"
+                  element={<Signup/>}
+                  ></Route>
 
-              <Route
-                path="/login"
-                element={<Login/>}
-              ></Route>
+                <Route
+                  path="/recipe/:recipeId"
+                  element={<Recipe/>}
+                ></Route>
 
-              <Route
-                path="/me"
-                element={<Profile addRecipeList = {true}/>}
-              ></Route>
+                <Route
+                  path="/login"
+                  element={<Login/>}
+                ></Route>
 
-              <Route
-                path="/profile/:username"
-                element={<Profile addRecipeList = {false}/>}
-              ></Route>
-            </Routes>
+                <Route
+                  path="/me"
+                  element={<Profile addRecipeList = {true}/>}
+                ></Route>
+
+                <Route
+                  path="/profile/:username"
+                  element={<Profile addRecipeList = {false}/>}
+                ></Route>
+
+              </Routes>
+            </div>
+            <Footer/>
           </div>
-        {/* </div> */}
+
       </Router>
+      
     </ApolloProvider>
   );
 }
-
 export default App;
 
 

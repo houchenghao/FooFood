@@ -21,17 +21,20 @@ const Home = () => {
         )
     }
 
-    
     if (!Auth.loggedIn()) {
         return (
-          <h4>
-            You need to be logged in to see this.
-          </h4>
+            <div className='viewport-background'>
+                    <h4 className='viewport-background'>
+                         You need to be logged in to see this.
+                    </h4>
+
+            </div>
+
         );
     }
 
     return (
-        <main>
+        <main >
             <div >
                 <RecipeList recipes = {recipes}/>
             </div>
