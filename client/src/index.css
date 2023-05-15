@@ -48,10 +48,14 @@
 }
 
 
-.home-page-recipe-container {
+.recipe-container {
     padding: 10px;
     display: flex;
     justify-content: center;
+}
+
+.recipe-card {
+    height: 25%;
 }
 
 .home-page-recipe-name {
@@ -62,14 +66,7 @@
 }
 
 
-/* width: 80%;
-display: flex;
-flex-wrap: wrap;
-/* margin: 10px; */
-justify-content: center;
-/* background-color: #8bc7be83; */
-/* height: 100vh; */
-box-sizing: border-box; */
+
 
 
 .add-recipe-form-container {
