@@ -36,7 +36,7 @@ const CommentForm = ({ recipeId }) => {
 
   return (
     <div style={{ width:'80%'}}>
-      <h4 style={{ marginBottom: '10px' }}>Leave your comment here</h4>
+      <h4 style={{ marginBottom: '10px' }} className='comment-label'>Leave your comment here</h4>
 
       {Auth.loggedIn() ? (
         <>

@@ -78,8 +78,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100vh; /* Subtract the height of the header or any other fixed elements */
-    background-color: rgba(63, 64, 65, 0.205);
+    min-height: 100vh; 
 }
 
 .add-recipe-form-description {
@@ -110,6 +109,7 @@
     width: 600px;
     height: 400px;
     background-color: beige;
+    font-family: fantasy;
 }
 
 .recipe-description-container{
@@ -118,6 +118,7 @@
     min-height: 200px;
     border-radius: 10px;
     padding: 5px;
+    font-family: cursive;
 }
 
 .others-profile-text {
@@ -126,17 +127,28 @@
     text-decoration:none;
 }
 
+.comment-label {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
 .comment-container {
     display: flex;
     width: 80%;
+    height: 300px;
     justify-content: center;
-    height:200px;
+    min-height:200px;
     overflow-y: auto;
 }
 
 .comment-card {
     width: 70%;
     margin-bottom: 10px;
+}
+
+.comment-text {
+    font-size: large;
+    font-family:cursive;
 }
 
 .comment{
