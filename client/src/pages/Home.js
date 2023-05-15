@@ -24,7 +24,7 @@ const Home = () => {
     if (!Auth.loggedIn()) {
         return (
             <div className='viewport-background'>
-                    <h4 className='viewport-background'>
+                    <h4 className='viewport-background p-5'>
                          You need to be logged in to see this.
                     </h4>
 
