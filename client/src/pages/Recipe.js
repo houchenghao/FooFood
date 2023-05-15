@@ -93,7 +93,7 @@ const Recipe = () => {
             <div>
                 <div>
                     {Auth.getProfile().data._id !== recipe.userId._id ? (
-                    <button onClick={submitCheckout} className='like-food-button'>Like This Food $5$ ?</button>
+                    <button onClick={submitCheckout} className='like-food-button'>SUPPORT $5$ ?</button>
                     ) : (
                     <span></span>
                     )}
