@@ -109,12 +109,20 @@ const Recipe = () => {
                     <form onSubmit={handleFormSubmit}>
                         <h2 className='home-page-recipe-name '> Name: {recipe.recipeName} </h2>
                         
-                        <textarea 
-                            name = 'recipeDescription'
-                            className='profile-text'
-                            defaultValue={recipe.recipeDescription}
-                            onChange={handleChange}
-                        ></textarea>
+
+                        {Auth.getProfile().data._id === recipe.userId._id ? (
+                            <textarea 
+                                name = 'recipeDescription'
+                                className='profile-text'
+                                defaultValue={recipe.recipeDescription}
+                                onChange={handleChange}
+                            ></textarea>
+
+                        ) : (
+                            <p>
+                            {recipe.recipeDescription}
+                            </p>
+                        )}
 
                         <div>
                             <button
@@ -126,13 +134,27 @@ const Recipe = () => {
                         </div>
                     </form>
 
-                    <button 
+                    {Auth.getProfile().data._id === recipe.userId._id ?(                    
+                        <button 
+                            className="btn btn-primary btn-block py-1"
+                            onClick={deleteRecipeHandle}
+                            type="button"
+                            style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
+                            Delete
+                        </button>):(
+                            <div>
+
+                            </div>
+                        )} 
+                    
+                    
+                    {/* <button 
                         className="btn btn-primary btn-block py-1"
                         onClick={deleteRecipeHandle}
                         type="button"
                         style={{backgroundColor: '#e45454',border:'none', height:'30px'}}>
                         Delete
-                    </button>
+                    </button> */}
                 </div>   
 
                 <div>
@@ -144,7 +166,6 @@ const Recipe = () => {
 
             <div>
                 <CommentList comments = {comments}/>
-                
             </div>
                 
             <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
