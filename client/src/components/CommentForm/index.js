@@ -24,6 +24,7 @@ const CommentForm = ({ recipeId }) => {
       });
 
       form.resetFields();
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -58,7 +59,7 @@ const CommentForm = ({ recipeId }) => {
               />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{backgroundColor:'rgb(20, 22, 21)'}}>
               Add Comment
             </Button>
           </Form>
