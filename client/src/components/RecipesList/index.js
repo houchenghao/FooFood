@@ -9,8 +9,10 @@ const RecipeList = ({recipes}) => {
   const parts = currentURL.split('/');
   const name = parts[parts.length - 1];
     return(
+      
       <div className='p-3' style={{fontFamily:'cursive'}}>
-          <h1>Welcome to {name}'s recipes</h1>
+        {name==='me' || name===''?(<span></span>):(<h1>Here is {name}'s recipes</h1>)}
+          
           
           <div className='recipe-container'>
             {recipes.map((recipe) => (
