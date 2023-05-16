@@ -21,7 +21,7 @@
     login/signup,
     Check other user recipes,
     Create recipe with name, description and upload image
-    Commenting other user's recipe
+    Commenting other user's recipe ()
     Update your recipe's description 
     Delete your recipe
     Donation
