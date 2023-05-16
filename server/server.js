@@ -6,14 +6,10 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-
-
 const uploadImage = require('./utils/uploadImage.js')
-
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
 
 const server = new ApolloServer({
   typeDefs,
