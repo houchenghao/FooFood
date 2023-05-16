@@ -14,7 +14,6 @@ import CommentList from '../components/CommentList'
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
-
 const Recipe = () => {
     const [getCheckout , {data:checkoutData}] = useLazyQuery(QUERY_CHECKOUT)
 
@@ -38,7 +37,7 @@ const Recipe = () => {
     const { loading:recipeLoading, data:recipeData } = useQuery(userParam ? QUERY_SINGLE_RECIPE : QUERY_RECIPES, {
         variables: {recipeId: userParam}
     });  
-    // const recipe = recipeData?.recipe || {};
+    
 
     const { loading:commentLoading, data:commentData } = useQuery(QUERY_RECIPE_COMMENTS,{
         variables: {recipeId:userParam}
@@ -46,8 +45,6 @@ const Recipe = () => {
 
     const [updateRecipeDescription, { error: updateRecipeDescriptionError}] = useMutation(UPDATE_RECIPE_DESCREPTION);
     const [deleteRecipe, {error: deleteRecipeError} ] = useMutation(DELETE_RECIPE);
-
-    // const comments = commentData?.recipeComment || {};
 
     if(recipeLoading||commentLoading) {
         return <div>Loading...</div>
