@@ -27,11 +27,11 @@
     Donation
     
 ## Screenshots
-    ![](./asset/images/1.PNG)
-    ![](./asset/images/2.PNG)
-    ![](./asset/images/3.PNG)
-    ![](./asset/images/4.PNG)
-    ![](./asset/images/5.PNG)
+![](./asset/images/1.PNG)
+![](./asset/images/2.PNG)
+![](./asset/images/3.PNG)
+![](./asset/images/4.PNG)
+![](./asset/images/5.PNG)
 
  ## Contributing
     Chenghao
