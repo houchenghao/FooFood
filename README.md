@@ -2,7 +2,7 @@
 # FooFood
 
 ## Description
-    At Foofood, food brings people together. This platform is designed to foster a vibrant community of food enthusiasts, home cooks, and passionate individuals who love sharing their culinary creations with the world.
+At Foofood, food brings people together. This platform is designed to foster a vibrant community of food enthusiasts, home cooks, and passionate individuals who love sharing their culinary creations with the world.
 
 
 ## Installation
